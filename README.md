@@ -1,6 +1,5 @@
 # grunt-amdclean
-
-> A Grunt task for AMDClean.
+Grunt task for [AMDClean](https://github.com/gfranko/amdclean)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -22,7 +21,7 @@ grunt.loadNpmTasks('grunt-amdclean');
 ### Overview
 In your project's Gruntfile, add a section named `amdclean` to the data object passed into `grunt.initConfig()`.
 
-```js
+```
 grunt.initConfig({
   amdclean: {
     options: {
@@ -35,55 +34,85 @@ grunt.initConfig({
 });
 ```
 
+### Parameters
+#### src
+Type: `String`
+**Required**
+
+Source file path to run through AMDClean.
+
+#### dest
+Type: `String`
+Optional
+
+Destination file path to output code run through AMDClean. If not provided, `src` value will be used.
+
 ### Options
+In addition to the default [AMDClean options](https://github.com/gfranko/amdclean#options), the following options are available:
 
-#### options.separator
+#### autoModuleTransform
+Type: `Boolean`
+Default value: `false`
+
+If `true`, rename all modules that AMDClean cleans. All modules will be prefixed with the options defined in `options.autoModulePrefix` following by an incrementing integer.
+
+This is useful for mangling an shortening module names.
+
+#### autoModulePrefix
 Type: `String`
-Default value: `',  '`
+Default value: `m`
 
-A string value that is used to do something with whatever.
+Value to prefix all modules names with if `options.autoModuleTransform` is set to `true`.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### wrap
+Type: `Object|Boolean`
+Default value: `Object`
 
-A string value that is used to do something else with whatever else.
+While this option is a part of AMDclean's default options, the grunt plugin add support for a boolean value. Setting the value to `true` will add the default wrap.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
 
-```js
+```
 grunt.initConfig({
   amdclean: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+    options: {
+        wrap: true,
+        autoModuleTransform: false,
+        autoModulePrefix: 'm'
     },
-  },
+    main: {
+        src: 'main.js',
+        dest: 'main.clean.js'
+    }
+  }
 });
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
 
-```js
+```
 grunt.initConfig({
   amdclean: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+        autoModuleTransform: true,
+        autoModulePrefix: '_'
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    main: 'src/main.js', // sorthand for { src: 'src/main.js' }
+    lib: {
+        options: {
+            autoModuleTransform: false
+        },
+        src: 'lib/main.js',
+        dest: 'lib/main.clean.js'
+    }
+  }
 });
 ```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality.
 
 ## Release History
-_(Nothing yet)_
+0.1.0 Initial Release
