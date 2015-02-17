@@ -1,4 +1,12 @@
-/*global module,require */
+/*
+ * grunt-amdclean
+ * https://github.com/aarongloege/grunt-amdclean
+ *
+ * Copyright (c) 2015 Aaron Gloege
+ * Licensed under the MIT license.
+ */
+
+'use strict';
 
 var amdclean = require('amdclean');
 
@@ -55,7 +63,6 @@ var _createPrefixTransform = function(options) {
 };
 
 module.exports = function(grunt) {
-    'use strict';
 
     // Register plugin
     grunt.registerMultiTask('amdclean', function() {

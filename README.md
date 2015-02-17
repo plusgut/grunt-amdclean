@@ -1,52 +1,89 @@
 # grunt-amdclean
-Grunt task for [AMDClean](https://github.com/gfranko/amdclean)
 
-## Usage
+> A Grunt task for AMDClean.
+
+## Getting Started
+This plugin requires Grunt `~0.4.5`
+
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+
+```shell
+npm install grunt-amdclean --save-dev
 ```
-amdclean: {
+
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+
+```js
+grunt.loadNpmTasks('grunt-amdclean');
+```
+
+## The "amdclean" task
+
+### Overview
+In your project's Gruntfile, add a section named `amdclean` to the data object passed into `grunt.initConfig()`.
+
+```js
+grunt.initConfig({
+  amdclean: {
     options: {
-        wrap: true,
-        autoModuleTransform: false,
-        autoModulePrefix: 'm'        
+      // Task-specific options go here.
     },
-    main: 'src/main.js', // sorthand for { src: 'src/main.js' }
-    lib: {
-        options: {
-            autoModuleTransform: true,
-            autoModulePrefix: 'lib'
-        },
-        src: 'lib/main.js',
-        dest: 'lib/main.clean.js'
-    }
-}
+    your_target: {
+      // Target-specific file lists and/or options go here.
+    },
+  },
+});
 ```
 
-## Parameters
-### src
-`String` **required**
-Source file path to run through AMDClean.
+### Options
 
-### dest
-`string` optional
+#### options.separator
+Type: `String`
+Default value: `',  '`
 
-Destination file path to output code run through AMDClean. If not provided, `src` value will be used.
+A string value that is used to do something with whatever.
 
-## Options
-In addition to the default [AMDClean options](https://github.com/gfranko/amdclean#options), the following options are available:
+#### options.punctuation
+Type: `String`
+Default value: `'.'`
 
-### autoModuleTransform
-`Boolean` default: `false`
+A string value that is used to do something else with whatever else.
 
-If `true`, rename all modules that AMDClean cleans. All modules will be prefixed with the options defined in `options.autoModulePrefix` following by an incrementing integer.
+### Usage Examples
 
-This is useful for mangling an shortening module names.
+#### Default Options
+In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
 
-### autoModulePrefix
-`String` default: `m`
+```js
+grunt.initConfig({
+  amdclean: {
+    options: {},
+    files: {
+      'dest/default_options': ['src/testing', 'src/123'],
+    },
+  },
+});
+```
 
-Value to prefix all modules names with if `options.autoModuleTransform` is set to `true`.
+#### Custom Options
+In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
 
-### wrap
-`Object|Boolean` default: `Object`
+```js
+grunt.initConfig({
+  amdclean: {
+    options: {
+      separator: ': ',
+      punctuation: ' !!!',
+    },
+    files: {
+      'dest/default_options': ['src/testing', 'src/123'],
+    },
+  },
+});
+```
 
-While this option is a part of AMDclean's default options, the grunt plugin add support for a boolean value. Setting the value to `true` will add the default wrap.
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+## Release History
+_(Nothing yet)_

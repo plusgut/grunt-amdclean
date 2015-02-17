@@ -1,6 +1,6 @@
 {
     "name": "grunt-amdclean",
-    "description": "Grunt task for AMDClean",
+    "description": "A Grunt task for AMDClean.",
     "version": "0.1.0",
     "homepage": "https://github.com/aarongloege/grunt-amdclean",
     "author": {
@@ -10,7 +10,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/aarongloege/grunt-amdclean.git"
+        "url": "https://github.com/aarongloege/grunt-amdclean.git"
     },
     "bugs": {
         "url": "https://github.com/aarongloege/grunt-amdclean/issues"
@@ -18,18 +18,18 @@
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/aarongloege/grunt-amdclean/blob/master/LICENSE"
+            "url": "https://github.com/aarongloege/grunt-amdclean/blob/master/LICENSE-MIT"
         }
     ],
     "engines": {
         "node": ">= 0.8.0"
     },
     "devDependencies": {
-        "grunt": "~0.4.2",
+        "grunt": "~0.4.5",
         "amdclean": "gfranko/amdclean#2.3.0"
     },
     "peerDependencies": {
-        "grunt": "~0.4.2"
+        "grunt": "~0.4.5"
     },
     "keywords": [
         "gruntplugin"
