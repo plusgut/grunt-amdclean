@@ -19,9 +19,8 @@ module.exports = function(grunt) {
               autoModulePrefix: '_'
           },
           main: {
-              files: {
-                  'test/main.clean.js': 'test/main.js'
-              }
+              src: 'test/main.js',
+              dest: 'test/main.clean.js'
           }
       }
 

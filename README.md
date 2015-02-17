@@ -1,16 +1,35 @@
 # grunt-amdclean
-Grunt task for AMDClean
+Grunt task for [AMDClean](https://github.com/gfranko/amdclean)
 
 ## Usage
 ```
 amdclean: {
-    build: {
-        files: {
-            'test/main.clean.js': 'test/main.js'
-        }
+    options: {
+        wrap: true,
+        autoModuleTransform: false,
+        autoModulePrefix: 'm'        
+    },
+    main: 'src/main.js', // sorthand for { src: 'src/main.js' }
+    lib: {
+        options: {
+            autoModuleTransform: true,
+            autoModulePrefix: 'lib'
+        },
+        src: 'lib/main.js',
+        dest: 'lib/main.clean.js'
     }
 }
 ```
+
+## Parameters
+### src
+`String` **required**
+Source file path to run through AMDClean.
+
+### dest
+`string` optional
+
+Destination file path to output code run through AMDClean. If not provided, `src` value will be used.
 
 ## Options
 In addition to the default [AMDClean options](https://github.com/gfranko/amdclean#options), the following options are available:

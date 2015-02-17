@@ -63,6 +63,18 @@ module.exports = function(grunt) {
         var options = this.options(DEFAULT_OPTIONS);
         var autoTransform = options.autoModuleTransform === true;
 
+        var src = typeof this.data === 'string' ? this.data : this.data.src;
+        var dest = this.data.dest;
+
+        if (!src || !grunt.file.exists(src)) {
+            grunt.log.error('Invalid source file: `' + src + '`.');
+            return;
+        }
+
+        if (!dest) {
+            dest = src;
+        }
+
         // If code is set, files will not be read
         delete options.code;
 
@@ -78,21 +90,18 @@ module.exports = function(grunt) {
             options.wrap = DEFAULT_WRAP;
         }
 
-        // Clean files
-        this.files.forEach(function(file) {
-            // Set file path
-            options.filePath = file.src[0];
+        // Set file path
+        options.filePath = src;
 
-            // Transform each module name into something simple (m1, m2, m3).
-            // UglifyJS will not mangle these names, so it is ideal to keep them small.
-            if (autoTransform) {
-                options.prefixTransform = _createPrefixTransform(options);
-            }
+        // Transform each module name into something simple (m1, m2, m3).
+        // UglifyJS will not mangle these names, so it is ideal to keep them small.
+        if (autoTransform) {
+            options.prefixTransform = _createPrefixTransform(options);
+        }
 
-            grunt.file.write(file.dest, amdclean.clean(options));
+        grunt.file.write(dest, amdclean.clean(options));
 
-            grunt.log.ok('Cleaning ' + file.dest.cyan + ': ' + ' OK'.green);
-        });
+        grunt.log.ok('AMDClean ' + src.cyan + ' > ' + dest.cyan + ': ' + ' OK'.green);
 
         done();
     });
