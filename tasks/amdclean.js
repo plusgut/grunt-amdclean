@@ -74,10 +74,11 @@ module.exports = function(grunt) {
         var dest = this.data.dest;
 
         if (!src || !grunt.file.exists(src)) {
-            grunt.log.error('Invalid source file: `' + src + '`.');
+            grunt.log.error('Invalid or missing source file: `' + src + '`.');
             return;
         }
 
+        // if dest is not defined, write the AMDClean output to the src file
         if (!dest) {
             dest = src;
         }
@@ -88,7 +89,8 @@ module.exports = function(grunt) {
         // warn about `autoModuleTransform` and `prefixTransform` options
         if (autoTransform && options.prefixTransform) {
             grunt.log.warn(
-                'autoModuleTransform'.cyan + ' and ' + 'prefixTransform'.cyan + ' are mutually exclusive options. Ignoring ' + 'prefixTransform'.cyan
+                'autoModuleTransform'.cyan + ' and ' + 'prefixTransform'.cyan +
+                ' are mutually exclusive options. Ignoring ' + 'prefixTransform'.cyan
             );
         }
 
