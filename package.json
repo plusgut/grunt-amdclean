@@ -1,7 +1,7 @@
 {
     "name": "grunt-amdclean",
     "description": "A Grunt task for AMDClean.",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "homepage": "https://github.com/aarongloege/grunt-amdclean",
     "author": {
         "name": "Aaron Gloege",
