@@ -15,8 +15,7 @@ module.exports = function(grunt) {
 
       amdclean: {
           options: {
-              autoModuleTransform: false,
-              autoModulePrefix: '_'
+              modulePrefix: '_'
           },
           main: {
               src: 'test/main.js',

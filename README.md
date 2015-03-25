@@ -50,19 +50,11 @@ Destination file path to output code run through AMDClean. If not provided, `src
 ### Options
 In addition to the default [AMDClean options](https://github.com/gfranko/amdclean#options), the following options are available:
 
-#### autoModuleTransform
-Type: `Boolean`
+#### modulePrefix
+Type: `StringBoolean`
 Default value: `false`
 
-If `true`, rename all modules that AMDClean cleans. All modules will be prefixed with the options defined in `options.autoModulePrefix` following by an incrementing integer.
-
-This is useful for mangling an shortening module names.
-
-#### autoModulePrefix
-Type: `String`
-Default value: `m`
-
-Value to prefix all modules names with if `options.autoModuleTransform` is set to `true`.
+Value to prefix all modules names with. This options can not be used in conjunction with AMDClean's `prefixTransform` option.
 
 #### wrap
 Type: `Object|Boolean`
@@ -79,8 +71,7 @@ grunt.initConfig({
   amdclean: {
     options: {
         wrap: true,
-        autoModuleTransform: false,
-        autoModulePrefix: 'm'
+        modulePrefix: 'm'
     },
     main: {
         src: 'main.js',
@@ -96,8 +87,7 @@ grunt.initConfig({
 grunt.initConfig({
   amdclean: {
     options: {
-        autoModuleTransform: true,
-        autoModulePrefix: '_'
+        modulePrefix: '_module_'
     },
     main: 'src/main.js', // sorthand for { src: 'src/main.js' }
     lib: {

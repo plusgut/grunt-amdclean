@@ -23,7 +23,7 @@ var DEFAULT_OPTIONS = {
 
     // If `autoModuleTransform` is `true`, prefix all modules with
     // this string, followed by an incrementing number
-    autoModulePrefix: 'm'
+    modulePrefix: false
 };
 
 /**
@@ -45,20 +45,19 @@ var DEFAULT_WRAP = {
  *
  * @type Function
  * @param {Object} options
- * @param {String} options.autoModulePrefix
+ * @param {String} options.modulePrefix
  * @returns {Function}
  * @private
  */
 var _createPrefixTransform = function(options) {
     var map = {};
-    var i = 0;
 
-    return function(module) {
-        if (!map.hasOwnProperty(module)) {
-            map[module] = options.autoModulePrefix + (i++);
+    return function(mangledModule, module) {
+        if (!map.hasOwnProperty(mangledModule)) {
+            map[mangledModule] = options.modulePrefix + module;
         }
 
-        return map[module];
+        return map[mangledModule];
     };
 };
 
@@ -68,7 +67,7 @@ module.exports = function(grunt) {
     grunt.registerMultiTask('amdclean', function() {
         var done = this.async();
         var options = this.options(DEFAULT_OPTIONS);
-        var autoTransform = options.autoModuleTransform === true;
+        var autoTransform = options.modulePrefix !== false;
 
         var src = typeof this.data === 'string' ? this.data : this.data.src;
         var dest = this.data.dest;
@@ -89,7 +88,7 @@ module.exports = function(grunt) {
         // warn about `autoModuleTransform` and `prefixTransform` options
         if (autoTransform && options.prefixTransform) {
             grunt.log.warn(
-                'autoModuleTransform'.cyan + ' and ' + 'prefixTransform'.cyan +
+                'modulePrefix'.cyan + ' and ' + 'prefixTransform'.cyan +
                 ' are mutually exclusive options. Ignoring ' + 'prefixTransform'.cyan
             );
         }
