@@ -92,7 +92,7 @@ grunt.initConfig({
     main: 'src/main.js', // sorthand for { src: 'src/main.js' }
     lib: {
         options: {
-            autoModuleTransform: false
+            modulePrefix: false
         },
         src: 'lib/main.js',
         dest: 'lib/main.clean.js'
