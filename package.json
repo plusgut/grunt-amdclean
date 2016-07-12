@@ -28,7 +28,7 @@
         "amdclean": "gfranko/amdclean#2.3.0"
     },
     "devDependencies": {
-        "grunt": "~0.4.5",
+        "grunt": ">=0.4.5",
         "amdclean": "gfranko/amdclean#2.3.0"
     },
     "peerDependencies": {
